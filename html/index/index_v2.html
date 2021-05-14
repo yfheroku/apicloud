@@ -1,0 +1,878 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="../../css/index_v2.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/normalize.css" />
+    <link rel="stylesheet" href="../../css/swiper0.min.css">
+    <script src="../../script/api.js" charset="utf-8"></script>
+    <script src="../../script/swiper.min.js"></script>
+    <script src="../../script/jquery-1.8.3.min.js"></script>
+    <script src="../../script/common.js"></script>
+    <script src="../../script/url.js"></script>
+    <style type="text/css">
+        .aui-badge {
+            position: absolute;
+            top: 0%;
+            left: 70%;
+            z-index: 99;
+            display: inline-block;
+            width: auto;
+            text-align: center;
+            width: 0.8rem;
+            height: 0.8rem;
+            line-height: 0.8rem;
+            font-size: 0.6rem;
+            color: black;
+            background-color: white;
+            font-weight: bold;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-zone">
+        <div class="header" id="header">
+            <div class="logo"><img src="../../image/logo1.png">
+            </div>
+            <div class="header_text" onclick="search()">
+                <div class="search" onclick="search()"><img src="../../image/sousuo.png">
+                </div>
+                <input type="search" class="keyword" placeholder="请输入关键字或任务编号">
+            </div>
+            <div class="message" onclick="message()">
+                <div>
+                    <img src="../../image/message.png">
+                    <div class="aui-badge" id="noticeCount" style="display:none">10</div>
+                    <span>消息</span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="swiper-zone">
+        <div style="height: 3.5rem;"></div>
+        <!--广告-->
+        <div class="swiper-container">
+            <div class="swiper-wrapper" id="yplist">
+                <div class="swiper-slide">
+                    <img src="../../image/banner.png">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../image/banner.png">
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination" style="left: 0%;"></div>
+        </div>
+    </div>  
+    <div class="notify-zone">
+        <div class="content">
+            <img src="../../image/speaker.png" alt="">
+            <div class="text slide-list" id="messageList">
+                <li class="clearfix">
+                    <span class="l">测试</span>
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="top-zone">
+        <div class="intro-zone">
+            <div class="intro-item" id="topTasks">
+            </div>
+        </div>
+        <div class="link-zone">
+            <div class="icon-zone">
+                <a href="javascript:;" class="icon" onclick="jisu_taskslist()">
+                    <img src="../../image/paper_plane.png">
+                    <div class="txt">极速审核</div>
+                </a>
+                <a href="javascript:;" class="icon"  onclick="jisu_taskslist()">
+                    <img src="../../image/almaz.png">
+                    <div class="txt">每日推荐</div>
+                </a>
+                <a href="javascript:;" class="icon" onclick="pay_game()">
+                    <img src="../../image/auction.png">
+                    <div class="txt">待定待定</div>
+                </a>
+                <a href="javascript:;" class="icon" onclick="pay_game()">
+                    <img src="../../image/money.png">
+                    <div class="txt">试玩赚钱</div>
+                </a>
+                <a href="javascript:;" class="icon" onclick="game()">
+                    <img src="../../image/game.png">
+                    <div class="txt">游戏赚钱</div>
+                </a>
+            </div>
+            <a href="javascript:;" class="banner" onclick="member_center()">
+                <img src="../../image/banner1-sm.png">
+            </a>
+            <div class="links">
+                <div class="item" onclick="new_taskslist(1)">
+                    <div class="button-text">新单榜</div>
+                    <img src="../../image/button-bg1.png">
+                </div>
+                 <div class="item" onclick="daily_tasks()">
+                    <div class="button-text">周排行</div>
+                    <img src="../../image/button-bg2.png">
+                </div>
+                <div class="item" onclick="ranking_award()">
+                    <div class="button-text">月排行</div>
+                    <img src="../../image/button-bg3.png">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="task-zone">
+        <div class="top">
+            <a href="javascript:;" onclick="openWinTasks()">更多任务 ></a>
+            <div class="tit">推荐任务</div>
+        </div>
+        <div class="list-zone" id="task">
+            <a href="javascript:;" class="items">
+                <div class="item">
+                    <div class="pic-zone">
+                        <img src="../../image/avatar.png" class="head">
+                        <img src="../../image/icon-v.png" class="icon-v">
+                    </div>
+                    <div class="right">
+                        <div class="top-side">
+                            <span class="txt-icon ding">置顶</span>
+                            <span class="txt-icon jian">推荐</span>
+                            2秒投票2秒投票2秒投票2秒投票
+                        </div>
+                        <div class="down-side">
+                            <span>
+                                <span class="mark">360人已赚</span>
+                                <span class="mark">租微信号</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="price">120.00元</div>
+            </a>
+        </div>
+    </div>
+    <div class="form" onclick="my_tasks()">
+        <div class="order_list">
+            <span id="form_num"></span>
+            <img src="../../image/tasks.png">
+        </div>
+    </div>
+</body>
+<script>
+    var doscroll = function() {
+        var $parent = $('.slide-list');
+        var $first = $parent.find('li:first');
+        var height = $first.height();
+        $first.animate({
+            marginTop: -height + 'px'
+        }, 1000, function() {
+            $first.css('marginTop', 0)
+                .appendTo($parent);
+        });
+    };
+    setInterval(function() {
+        doscroll()
+    }, 3000);
+
+    function go_back() {
+        api.closeWin({});
+    } //滚动消息
+</script>
+
+
+<script>
+    apiready = function() {
+        //查询配置信息
+        api.ajax({
+            url: config,
+            method: 'GET',
+        }, function(ret, err) {
+            $.each(ret.data, (key, value) => {
+                console.log(key, value);
+                $api.setStorage(key, value);
+            });
+        })
+
+        height()
+        appVersion()
+            // console.log(api.winName)
+        token = $api.getStorage('token');
+        var systemType = api.systemType;
+        // if (systemType=="ios"){
+        //     $(".card").addClass("yinfgc")
+        // }
+            //启动监听 addEventListener ->
+        api.addEventListener({
+            name: 'index_lo'
+        }, function(ret, err) {
+            // console.log(JSON.stringify(ret));
+            // console.log(JSON.stringify(err));
+            window.location.reload();
+            if (ret) {
+
+
+            } else {}
+        });
+
+        api.requestPermission({
+            list: ['storage', 'camera', 'photos'],
+            code: 100001
+        }, function(ret, err) {
+            var len = ret.list.length;
+            for (var i = 0; i < len; i++) {
+
+                if (ret.list[i].granted == false) {
+                    publicFunction.checkPermission();
+                } else {
+                    // publicFunction.checkPermission();
+                    //  alert(2)
+                }
+            }
+            //  api.alert({
+            //      msg:JSON.stringify(ret)
+            //      });
+        });
+        // confirmPer('camera,sensor',function(){
+        //         title: '判断完回来了。',
+        //         msg: 'testmsg',
+        //     }, function(ret, err){
+        //     });
+        // });
+        
+        //启动监听 addEventListener ->
+        api.addEventListener({
+            name: 'downapp'
+        }, function(ret, err) {
+            console.log(JSON.stringify(ret));
+            if (ret) {
+                download(ret.value.link);
+            } else {}
+        });
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            // alert('按了返回键');
+            api.toast({
+                msg: '再按一次返回键退出',
+                duration: 2000,
+                location: 'bottom'
+            });
+
+            api.addEventListener({
+                name: 'keyback'
+            }, function(ret, err) {
+                api.closeWidget({
+                    silent: true
+                });
+            });
+        });
+
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#ccc',
+            textColor: '#fff',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            //在这里从服务器加载数据，加载完成后调用
+            //停止api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            window.location.reload();
+            api.refreshHeaderLoadDone();
+        });
+        //alert(token);return false;
+        get_banner() //轮播图
+        messagelist() //滚动消息
+        TopTask() //置顶任务
+        ReTasks() //推荐任务
+            // product_type()
+        get_notice();
+        getform()
+        personalInfos()
+        quanx()
+
+
+    }
+    function download(url) {
+        downloadManager = api.require('downloadManager');
+
+        downloadManager.enqueue({
+            url: url,
+            //savePath: 'fs://count_v2_20161115.apk',
+            cache: false,
+            allowResume: true,
+            uncompress: false,
+            title: '游戏',
+            networkTypes: 'all'
+        }, function(ret, err) {
+            console.log(JSON.stringify(ret));
+            if (ret) {
+                downid = ret.id;
+                processAndOpenFile(downid);
+            } else {
+               console.log(JSON.stringify(err));
+            }
+
+        });
+        return false;
+    }
+
+    //查询下载进度
+    function processAndOpenFile(downid) {
+        console.log(downid);
+        downloadManager.query({
+            ids: [
+                downid
+            ]
+        }, function(ret, err) {
+            var t = parseInt(ret.data[0].totalSize);
+            var f = ret.data[0].finishSize;
+            if (t > 0) $('#aaa').html('总大小:' + t + ',已下载:' + f);
+            console.log(ret.data[0].status)
+            if (ret.data[0].status != 3) {
+                setTimeout('processAndOpenFile('+downid+')', 1000);   
+            } else {
+                downloadManager.openDownloadedFile({
+                    id: downid
+                });
+            }
+        });
+    }
+    $(".keyword").on('keypress', function(e)  {
+        var  keycode  =  e.keyCode;
+        var  searchName  =  $(this).val();
+        alert(keycode)
+        if (keycode == '13')  {
+            e.preventDefault();
+            alert(searchName)
+                //请求搜索接口  
+        }
+    }); 
+
+    function submitInputContent() {
+        alert(121212)
+
+    }
+
+    function get_notice() {
+        api.ajax({
+            url: get_notice_summary,
+            method: 'post',
+            data: {
+                values: {
+                    token: token,
+                }
+            }
+        }, function(ret, err) {
+            console.log(JSON.stringify(ret));
+            $api.setStorage('notice_total', ret.total_count);
+            $api.setStorage('notice_order', ret.order_count);
+            $api.setStorage('notice_system', ret.system_count);
+            //标记消息
+            if (ret.total_count > 0) {
+                $("#noticeCount").show().html(ret.total_count);
+            }
+        });
+    }
+
+
+    function getform() {
+        api.ajax({
+            url: get_task_url,
+            method: 'post',
+            data: {
+                values: {
+                    token: token,
+                }
+            }
+        }, function(ret, err) {
+            if (ret.code == 100) {
+
+                $(".form").show();
+                $api.html(form_num, ret.count);
+
+            } else {
+                $(".form").hide();
+            }
+        });
+
+    }
+
+    //轮播图
+    function get_banner() {
+        api.ajax({
+            url: get_banner_url,
+            method: 'post',
+        }, function(ret, err) {
+            if (ret.code == 100) {
+                length = ret.data.length;
+                // alert(length)
+                lblist = '';
+                for (var lb = 0; lb < length; lb++) {
+                    lblist += '<div class="swiper-slide" onclick="open_banner(\'' + ret.data[lb].b_href + '\')">'
+                    lblist += '<img src="' + URL + ret.data[lb].b_src + '" >'
+                    lblist += '</div>'
+                }
+                $api.html(yplist, lblist);
+                var swiper = new Swiper('.swiper-container', {
+                    loop: true,
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    centeredSlides: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                });
+            }
+        });
+
+    }
+
+    //任务分类
+    function product_type() {
+        api.ajax({
+            url: product_type_list,
+            method: 'post',
+            data: {
+                values: {
+                    type: 1,
+                }
+            }
+        }, function(ret, err) {
+            //console.log(JSON.stringify(ret));
+            length = ret.data.length;
+            // alert(length)
+            typelist = '';
+            for (var tl = 0; tl < length; tl++) {
+                typelist += '<div class="col" onclick="list_1(' + ret.data[tl].pt_id + ')">'
+                typelist += '<div class="icon_pic"><img src=" ' + URL + ret.data[tl].pt_pic + ' "></div>'
+                typelist += '<h1>' + ret.data[tl].pt_name + '</h1>'
+                typelist += '</div>'
+            }
+            $api.html(type_list, typelist);
+
+        });
+
+    }
+
+
+    //滚动消息
+    function messagelist() {
+        api.ajax({
+            url: notices,
+            method: 'post',
+            data: {
+                values: {
+                    type: 1,
+                }
+            }
+        }, function(ret, err) {
+            // console.log(JSON.stringify(ret));
+
+            //
+            // }
+            length = ret.data.length;
+            // alert(length)
+            mgsslist = '';
+            for (var l = 0; l < length; l++) {
+                mgsslist += '<li class="clearfix" onclick="notices_sh(' + ret.data[l].id + ')">'
+                mgsslist += '<span class="l">' + ret.data[l].name + '</span>'
+                    // mgsslist += '<span class="im">赏' + ret.data[l].money + '元</span>'
+                mgsslist += '</li>'
+            }
+            $api.html(messageList, mgsslist);
+
+        });
+
+    }
+
+    // 推荐任务
+    function ReTasks() {
+        api.ajax({
+            // url: index_task_list_url,
+            url: index_task_list_urls,
+            method: 'post',
+            data: {
+                values: {
+                    token: token
+                }
+            }
+        }, function(ret, err) {
+            if (JSON.stringify(ret.data) != "[]") {
+                reList(ret.data);
+            }
+
+        });
+    }
+
+    // 置顶任务
+    function TopTask() {
+        api.ajax({
+            // url: index_task_list_url,
+            url: shouyejiek,
+            method: 'post',
+            data: {
+                values: {
+                    token: token
+                }
+            }
+        }, function(ret, err) {
+            if (JSON.stringify(ret.data) != "[]") {
+                topList(ret.data);
+            }
+
+        });
+    }
+
+    function topList(data) {
+        let html = "";
+        for (let index = 0; index < 4; index++) {
+            let item = data[index] 
+            if (!item) { 
+                item = {
+                    image: '../../image/avatar.png',
+                    is_zhiding: 1,
+                    is_tuijian: 1,
+                    title: '虚位以待',
+                    name: '虚位以待',
+                    yiyou_num: 0,
+                    num: 0,
+                    money: '00.00',
+                }
+            } else {
+                item.image = URL + item.image
+            }
+            let img = '<div class="top"><img src="' + item.image + '" class="head"><img src="../../image/icon-v.png" class="icon-v"></div>'
+            let tag = '<div class="bottom">';
+            if (Number(item.is_zhiding) == 1) {
+                tag += '<div><span class="mark">顶</span></div>';
+            }
+            if (Number(item.is_tuijian) == 1) {
+                tag += '<div><span class="mark">推</span></div>';
+            }
+            tag += '</div>';
+            let left = '<div class="left">' + img + tag + '</div>'
+
+            let title = '<div class="tit">' + item.title + '</div>' + 
+            '<div class="mark-list"><span class="mark">' + item.name + '</span></div>'
+
+            let desc = '<div class="infor">'+item.yiyou_num+'人已赚，剩余'+item.num+'个</div>'
+            let price = '<div class="price">￥'+item.money+'</div>'
+
+            let right = '<div class="right">'+ title + desc + price + '</div>';
+            html += 
+                '<a href="javascript:;" class="item-folder"><div class="item" onclick="list_detail(' + item.id + ')">' +
+                    left +
+                    right +
+                '</div></a>' 
+        }
+        console.log(html);
+        $api.html(topTasks, html);
+    }
+
+
+
+    function reList(data) {
+        var html = '';
+        var tlength = data.length;
+        for (let index = 0; index < tlength; index++) {
+            html += '<a href="javascript:;" class="items" onclick="list_detail(' + data[index].id + ')">'
+            html += '<div class="item">'
+            html += '<div class="pic-zone"> <img src=" ' + URL + data[index].image + ' " class="head"><img src="../../image/icon-v.png" class="icon-v"></div>'
+            html += '<div class="right">'
+            html += '<div class="top-side">'
+
+            if (Number(data[index].is_tuijian) == 1) {
+                html += '<span class="txt-icon ding">置顶</span>'
+
+            }
+            if (Number(data[index].is_zhiding) == 1) {
+                html += '<span class="txt-icon jian">推荐</span>'
+
+            }
+            html += data[index].title;
+            html += '</div>'
+            html += '<div class="down-side">'
+            html += '<span><span class="mark">'+data[index].yiyou_num+'人已赚</span><span class="mark">'+data[index].name+'</span></span>'
+            html += '</div>'
+            html += '</div>'
+            html += '</div>'
+            html += '<div class="price">' + data[index].money + '元</div>';
+        }
+
+        $api.html(task, html);
+    }
+
+
+    function search() {
+        api.openWin({
+            name: 'search',
+            url: 'search.html'
+        })
+    } //搜索
+    function member_center() {
+        api.openWin({
+            name: 'member_center',
+            url: '../my/member_center.html'
+        })
+    } //会员中心
+    function list_detail(id) {
+        api.openWin({
+            name: 'list_detail',
+            url: 'list_detail.html',
+            pageParam: {
+                id: id
+            }
+        })
+    }
+
+
+    function notices_sh(id) {
+        api.openWin({
+            name: 'notices_show',
+            url: '../dialog/notices_show.html',
+            pageParam: {
+                id: id
+            }
+        })
+    }
+    //列表详情
+    function list_1(position) {
+        //alert(position);return false;
+        api.openWin({
+            name: 'list',
+            url: 'list.html',
+
+            pageParam: {
+                position: position,
+            }
+        })
+    }
+
+    function list(type) {
+        api.openWin({
+            name: 'list',
+            url: 'list.html',
+            pageParam: {
+                type: type,
+            }
+        })
+    } //列表
+
+
+    function message() {
+        api.openWin({
+            name: 'message',
+            url: '../my/message.html'
+        })
+    } //消息
+    function daily_tasks() {
+        api.openWin({
+                name: 'ranking',
+                url: '../dialog/ranking.html'
+            })
+            // api.openWin({
+            //     name: 'daily_tasks',
+            //     url: '../my/daily_tasks.html'
+            // })
+    } //每日任务
+    function ranking_award() {
+        api.openWin({
+            name: 'ranking_award',
+            url: '../my/ranking_award.html'
+        })
+    } //新单榜
+    function new_taskslist() {
+        api.openWin({
+            name: 'tasks_new',
+            url: '../tasks/tasks_new.html'
+        })
+    } //极速审核榜
+    function jisu_taskslist() {
+        api.openWin({
+            name: 'tasks_js',
+            url: '../tasks/tasks_js.html'
+        })
+    }
+    //排行奖励
+    function my_tasks() {
+        api.openWin({
+            name: 'my_tasks',
+            url: '../my/my_tasks.html'
+        })
+    }
+
+    function openWinTasks() {
+        api.openWin({
+            name: 'tasks',
+            url: '../tasks/tasks.html',
+            reload: true,
+        });
+
+    }
+
+    function game() {
+        api.openWin({
+            name: 'game',
+            url: '../my/game.html'
+        })
+    }
+
+    function open_banner(url) {
+
+        api.openWin({
+            name: 'banner',
+            url: '../' + url
+        })
+    }
+
+    let user_id = 0;
+    let datas_user;
+    // 获取个人信息
+    function personalInfos() {
+        api.ajax({
+            url: personalInfo,
+            method: 'post',
+            data: {
+                values: {
+                    token: token,
+                }
+            }
+        }, function(ret, err) {
+            datas_user = ret
+            if (ret.code != 1) {
+                user_id = 0
+            } else {
+                let data = ret.data;
+                user_id = data.u_id
+            }
+        })
+    }
+
+    function quanx() {
+        api.requestPermission({
+            list: ['camera', 'photos', 'phone-r', 'storage', 'notification'],
+            code: 1
+        }, function(ret, err) {
+
+            // api.alert({
+            //     msg:JSON.stringify(ret)
+            // });
+
+        });
+    }
+
+    // 玩游戏
+    function pay_game() {
+        // alert(JSON.stringify(imei))
+        // return ;
+        if (user_id == 0) {
+            api.toast({
+                msg: "请先登录",
+                duration: 2000,
+                location: 'bottom'
+            });
+            return false;
+        }
+
+        let deviceId = '358240051111110'; //api.deviceId;
+        if (!deviceId) {
+            api.toast({
+                msg: "无法获取到设备码",
+                duration: 2000,
+                location: 'bottom'
+            });
+            //alert(deviceId)
+            return false;
+        }
+        api.ajax({
+            url: xw_game_url,
+            method: 'post',
+            data: {
+                values: {
+                    token: $api.getStorage('token'),
+                    system_type: api.systemType,
+                    device_id: deviceId,
+                }
+            },
+        }, function (ret, err) {
+            console.log(JSON.stringify(ret));
+            console.log(JSON.stringify(err));
+            api.openWin({
+                name: 'games',
+                url: '../my/games.html',
+                pageParam: {
+                    url: ret.data.url
+                }
+            })    
+        })
+    }
+
+    var parseParam = function(param, key) {
+        var paramStr = "";
+        if (param instanceof String || param instanceof Number || param instanceof Boolean) {
+            paramStr += "&" + key + "=" + encodeURIComponent(param);
+        } else {
+            $.each(param, function(i) {
+                var k = key == null ? i : key + (param instanceof Array ? "[" + i + "]" : "." + i);
+                paramStr += '&' + parseParam(this, k);
+            });
+        }
+        return paramStr.substr(1);
+    };
+
+    function appVersion() {
+        let appVersion = api.appVersion;
+        let systemType = api.systemType;
+        api.ajax({
+            url: update_datas,
+            method: 'post',
+            dataType: "json",
+            data: {
+                values: {
+                    vercode: appVersion,
+                    systemType: systemType,
+                }
+            }
+        }, function(ret, err) {
+            let data = ret.data;
+            if (ret.code == 200) {
+                api.alert({
+                    title: ret.msg
+                }, function(ret, err) {
+                    if (systemType == "android") {
+                        if (data.android) {
+                            api.openApp({
+                                mimeType: 'text/html',
+                                uri: data.android
+                            }, function(ret, err) {});
+                        }
+                    } else {
+                        if (data.ios) {
+                            api.openApp({
+                                mimeType: 'text/html',
+                                uri: data.ios
+                            }, function(ret, err) {
+
+                            });
+                        }
+                    }
+
+                });
+            }
+            //console.log(JSON.stringify(ret))
+        })
+    }
+</script>
+</html>

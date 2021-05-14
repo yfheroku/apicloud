@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>实名认证</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/swiper.min.css">
+    <link rel="stylesheet" href="../../css/release.css">
+
+    <script src="../../script/layui/layui.js"></script>
+    <script src="../../script/api.js" charset="utf-8"></script>
+    <script src="../../script/swiper.min.js"></script>
+    <script src="../../script/common.js"></script>
+    <script src="../../script/url.js"></script>
+    <script src="../../script/aui/script/aui-dialog.js"></script>
+    <script src="../../script/jquery-1.8.3.min.js"></script>
+
+    <body>
+        <div class="header" id="header">
+            <div class="search" onclick="go_back()"><img src="../../image/return.png"></div>
+            <div class="header_text">
+                <h1>实名认证</h1>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="renwu_de">
+            <div class="renwu_de_li" style="margin-top:0">
+                <div>
+                    <h4>真实姓名</h4>
+                    <p><input type="text" id="name" name="name" placeholder="请输入真实姓名"></p>
+                </div>
+                <div>
+                    <h4>身份证号</h4>
+                    <p><input type="text" name="card_no" id="card_no" maxlength="18" placeholder="请输入身份证号"></p>
+                </div>
+                <div>
+                    <h4>身份证<br/>正面图片</h4>
+                    <p>
+                        <img id="card_front_img" style="width:7rem; height: 7rem" class="add_img1" src="../../image/xj1.png" onclick="upLoad(this)">
+                        <input type="hidden" id="card_front" value="">
+                    </p>
+                </div>
+                <div>
+                    <h4>身份证<br/>反面图片</h4>
+                    <p>
+                        <img id="card_back_img" style="width:7rem; height: 7rem" class="add_img1" src="../../image/xj1.png" onclick="upLoad(this)">
+                        <input type="hidden" id="card_back" value="">
+                    </p>
+                </div>
+            </div>
+            <div class="shebei_type" id="status_panel" style="display:none">
+                <div class="renwu_de_li" style="margin-top:0">
+                    <div>
+                        <h4>审核结果</h4>
+                        <p id="status"></p>
+                    </div>
+                    <div>
+                        <h4>备注信息</h4>
+                        <p id="remark"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+            <ul>
+                <li></li>
+                <li onclick="add_datas()">提交</li>
+            </ul>
+        </footer>
+
+
+    </body>
+    <script>
+        var token = '';
+        // console.log(pt_nums)
+        apiready = function() {
+            height()
+            token = $api.getStorage('token');
+            loadData();
+        }
+
+        // 申请发布
+        function add_datas() {
+            var data = {
+                token: token,
+                name: $('#name').val(),
+                card_no: $('#card_no').val(),
+                card_front:  $('#card_front').val(),
+                card_back: $('#card_back').val(),
+            }
+            console.log(JSON.stringify(data));
+            api.ajax({
+                url: user_cert,
+                method: 'POST',
+                data: { values: data }
+            }, function(res,ret){
+                api.toast({
+                    msg: res.message,
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            })
+        }
+
+
+        // 渲染数据
+        function loadData() {
+            api.ajax({
+                url: user_cert + '?token=' + token,
+                method: 'GET',
+            }, function(res, ret) {
+                console.log(JSON.stringify(res));
+                if (res.data){
+                    $('#name').val(res.data.name),
+                    $('#card_no').val(res.data.card_no),
+                    $('#card_front_img').attr('src', URL + res.data.card_front),
+                    $('#card_front').val(res.data.card_front),
+                    $('#card_back_img').attr('src', URL + res.data.card_back),
+                    $('#card_back').val(res.data.card_back),
+
+                    $('#status_panel').show();
+                    if (res.data.status == 0) {
+                        $('#status').html('未审核');
+                    } else if (res.data.status == 1) {
+                        $('#status').html('审核通过').css('color', 'green');
+                    }else {
+                        $('#status').html('审核未通过').css('color', 'red');
+                    }
+                    $('#remark').html(res.data.remark);
+                }
+            }) 
+        }
+
+        function upLoad(e, displayElementId) {
+            api.getPicture({
+                sourceType: 'library',
+                encodingType: 'jpg',
+                mediaValue: 'pic',
+                destinationType: 'url',
+                allowEdit: true,
+                quality: 100,
+                targetWidth: 100,
+                targetHeight: 100,
+                saveToPhotoAlbum: false
+            }, function(ret, err) {
+                if (ret) {
+                    if (ret.data) {
+                        //将返回的路径放到id="img",为的是显示图片
+                        imgFile = ret.data;
+                        $(e).attr('src', imgFile);
+                        api.ajax({
+                            url: get_pic_1,
+                            method: 'post',
+                            data: {
+                                files: {
+                                    image: imgFile,
+                                }
+                            }
+                        }, function(ret, err) {
+                            if (ret) {
+                                if (ret.code == 1) {
+                                    $(e).attr('src', URL+ret.data);
+                                    $(e).next('input').val(ret.data);
+                                }
+                            }
+                        });
+                    } else {
+                        api.toast({ //弹框
+                            msg: '未上传图片', //提示语
+                            duration: 3000, //提示时长
+                            location: 'bottom' //提示位置
+                        });
+                    }
+                }
+            });
+        }
+        function go_back() {
+            api.closeWin({});
+        } 
+            
+    </script>
+</html>
